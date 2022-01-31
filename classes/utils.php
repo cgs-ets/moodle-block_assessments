@@ -95,10 +95,10 @@ class utils {
                 //return null;
             }
         }
+
+        $scheduledata = null;
+        $config = get_config('block_assessments');
         try {
-            //Get  config of this block.
-            $config = get_config('block_assessments');
-    
             // Get our prefered database driver.
             // Last parameter (external = true) means we are not connecting to a Moodle database.
             $externalDB = \moodle_database::get_driver_instance($config->dbtype, 'native', true);
@@ -106,23 +106,51 @@ class utils {
             $externalDB->connect($config->dbhost, $config->dbuser, $config->dbpass, $config->dbname, '');
 
             $username = 16481;
-            $timetabledata = $externalDB->get_records_sql($config->dbassessmentproc, array($username));
+            $scheduledata = $externalDB->get_records_sql($config->dbassessmentproc, array($username));
 
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
     
-        if (!empty($timetabledata)) {
-            $props = (object) [
-                'instanceid' => $instanceid,
-            ];
-            $relateds = [
-                'timetabledata' => $timetabledata,
-            ];
-            $timetable = new \block_assessments\external\assessments_exporter($props, $relateds);
-            $data = $timetable->export($OUTPUT);
-            var_export($data); exit;
+        if (empty($scheduledata)) {
+            return;
         }
+
+        // Get Moodle class mappings
+        $classmapping = array();
+        if (!empty($config->mappingtable)) {
+            $classcodes = array_filter(array_column($scheduledata, 'classcode'));
+            if ($classcodes) {
+                //$classcodes = array_map(function($code) {
+                //    return $code . #;
+                //}, $classcodes);
+                $sql = "SELECT  $config->mappingtableid,
+                                $config->mappingtableextcode,
+                                $config->mappingtablemoocode
+                          FROM  $config->mappingtable
+                         WHERE  0 = 1";
+                foreach ($classcodes as $code) {
+                    $sql .= " OR SynCode LIKE '$code%'";
+                }
+                $classmapping = $externalDB->get_records_sql($sql);
+
+                //echo "<pre>"; 
+                //var_export($sql);
+                //var_export($classmapping); 
+                //exit;
+            }
+        }
+
+        $props = (object) [
+            'instanceid' => $instanceid,
+        ];
+        $relateds = [
+            'scheduledata' => $scheduledata,
+            'classmapping' => $classmapping,
+        ];
+        $schedule = new \block_assessments\external\assessments_exporter($props, $relateds);
+        $data = $schedule->export($OUTPUT);
+        //echo "<pre>"; var_export($data); exit;
     
         return $data;
     }

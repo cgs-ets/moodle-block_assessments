@@ -18,303 +18,32 @@
     z-index: 1;
     position: relative;
 }
-.block_assessments .day.isloading {
-    height: 1px;
-    overflow: hidden;
-    opacity: 0;
+.block_assessments h5 {
+    margin-bottom: 0;
 }
-.block_assessments .day {
-    position: relative;
-    opacity: 1;
-}
-.block_assessments .period {
+.block_assessments table.assessments {
     width: 100%;
-    float: left;
-    position: relative;
-    background-color: #000;
-    max-width: 400px;
+    margin-bottom: 15px;
 }
-.block_assessments a.classinfo {
-    display: block;
-    height: 60px;
-    line-height: 23px;
-    padding: 10px 10px;
-    color: #000;
-    text-decoration: none;
-    position: relative;
-    border-right: 1px solid #fff;
-    background-color: #f4f6f8;
-    transition: opacity 0.3s;
-    overflow: hidden;
+.block_assessments table.assessments tr.assessment[data-eventorder="Past"] {
+    
 }
-.block_assessments a.classinfo:hover {
-    text-decoration: none;
-}
-.block_assessments .classdesc {
-    line-height: 21px;
-    display: block;
-    overflow: hidden;
-    margin-right: 35px;
-    text-overflow: ellipsis;
+.block_assessments table.assessments td {
+    font-size: 13px;
+    width: 25%;
     white-space: nowrap;
-    font-weight: 600;
-    vertical-align: top;
-}
-.block_assessments .classcode {
-    font-size: 85%;
-    font-weight: 500;
-    margin-left: 4px;
-}
-.block_assessments .time {
-    font-size: 80%;
-    vertical-align: top;
-}
-.block_assessments .room {
-    font-size: 80%;
-    position: absolute;
-    bottom: 6px;
-    padding-left: 5px;
-}
-.block_assessments .room:before {
-    content: "•";
-    color: rgba(0,0,0,0.2);
-    padding: 0 5px 0 0px;
-}
-.block_assessments .teacherphoto {
-    display: block;
-    position: absolute;
-    top: 13px;
-    right: 10px;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5);
-    z-index: 10;
-    height: 35px;
-    width: 35px;
-}
-.block_assessments .teacherphoto img {
-    display: block;
-    height: 100%;
-    width: 100%;
-}
-/* don't display photo to staff on their timetable, they know who they are... */
-.block_assessments .day.staff .teacherphoto {
-    display: none;
-}
-.block_assessments .day.staff .classdesc {
-    margin-right: 0;
-}
-
-/*****
-* Progress bar
-******/
-.block_assessments .progress-track {
-    background-color: rgba(0,0,0,0.2);
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}
-.block_assessments .progress-bar {
-    width: 0%;
-    height: 2px;
-    background-color: #0984e3;
-    position: relative;
-}
-/* little indicator */
-.block_assessments .progress-bar:after {
-    content: "";
-    width: 4px;
-    height: 4px;
-    position: absolute;
-    background: #0984e3;
-    right: 0;
-    bottom: -1px;
-    border-radius: 50%;
-    z-index: 10;
-    display: none;
-}
-.block_assessments .period.inprogress .progress-bar:after {
-    display: block;
-}
-
-/***** 
-* Inprogress periods
-******/
-.block_assessments .day.view-minimal .period.inprogress, .day.view-full .period.inprogress {
-    margin-top: -4px;
-    margin-left: -1px;
-}
-.block_assessments .day.view-minimal .period.inprogress a.classinfo, .day.view-full .period.inprogress a.classinfo {
-    height: 68px;
-    border-right: 0;
-    line-height: 28px;
-    padding-top: 11px;
-}
-.block_assessments .day.view-minimal .period.inprogress .room, .day.view-full .period.inprogress .room {
-    bottom: 8px;
-}
-
-/***** 
-* Fade completed periods
-******/
-.block_assessments .period.complete a.classinfo {
-    opacity: 0.6;
-}
-.block_assessments .period.complete a.classinfo:hover {
-    opacity: 1;
-}
-
-/*****
-* Special periods, like recess, lunch, etc.
-******/
-.block_assessments .period.break a.classinfo {
-    background-color: lightgrey;
-}
-
-/*****
-* Stacked view.
-******/
-.block_assessments .day.view-stacked a.classinfo {
-    border-right: 0;
-    height: 38px;
-    position: relative;
-}
-.block_assessments .day.view-stacked .classdesc {
-    line-height: 19px;
-    display: inline-block;
-    overflow: hidden;
-    margin-right: 0;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    font-weight: 600;
-    max-width: 270px;
-    margin-left: 60px;
-}
-.block_assessments .day.view-stacked .time {
-    position: absolute;
-    left: 0;
-    padding: 8px 0;
-    background-color: #545454;
-    top: 0;
-    width: 50px;
-    text-align: center;
-    color: #fff;
-    font-weight: 600;
-}
-.block_assessments .day.view-stacked .teacherphoto {
-    top: 0px;
-    right: 0px;
-    border-radius: 0;
-    box-shadow: none;
-    height: 38px;
-    width: 38px;
-}
-
-/*****
-* Minimal view.
-******/
-.block_assessments .day.view-minimal .classdesc {
-    margin-right: 0;
-}
-.block_assessments .day.view-minimal .teacherphoto {
-    top: 11px;
-    right: 5px;
-}
-
-/*****
-* Wrapped view
-******/
-.block_assessments .day.view-wrapped .period.inprogress {
-    margin-bottom: 8px;
-}
-.block_assessments .day.view-wrapped .period.upcoming {
-    margin-bottom: 12px;
-}
-.block_assessments .day.view-wrapped .period.completed {
-    margin-bottom: 12px;
-}
-
-/*****
-* Full view.
-******/
-.block_assessments .day.view-full .period.break .classdesc {
-    margin-right: 0;
-}
-
-/****
-* Visibility
-******/
-.block_assessments .timetable-maximised .timetable-visible {
-    display: none;
-}
-.block_assessments .timetable-minimised .timetable-invisible {
-    display: none;
-}
-.block_assessments .timetable-minimised a.timetable-prev {
-    display: none;
-}
-.block_assessments .timetable-minimised a.timetable-next {
-    display: none;
-}
-.block_assessments .timetable-minimised .period {
-    display: none;
-}
-
-/****
-* Navigation
-*****/
-.block_assessments .timetable-controls {
-    margin-bottom: 10px;
-    text-align: right;
-}
-.block_assessments .timetable-title {
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-left: 15px;
-
-}
-
-.block_assessments .timetable-term {
-    font-weight: 600;
-    font-size: 1.1rem;   
-    float:left;
-}
-.block_assessments .spinner {
-    display: none;
-    bottom: -3px;
-    position: relative;
-}
-.block_assessments .fetchingdata .spinner {
     display: inline-block;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
 }
-.block_assessments .spinner .circle {
-    display: inline-block;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid transparent;
-    border-top-color: #000;
-    border-left-color: #000;
-    text-indent: -9999px;
-    margin: 0 auto;
+.block_assessments table.assessments td.date {
+    width: 26%;
+    font-size: 11px;
 }
-.block_assessments .spinner .spin {
-  -webkit-animation: spin 0.4s linear 0s infinite;
-  -moz-animation: spin 0.4s linear 0s infinite;
-  -o-animation: spin 0.4s linear 0s infinite;
-  animation: spin 0.4s linear 0s infinite;
+.block_assessments table.assessments td.title1 {
+    width: 10%;
 }
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-@-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
-}
-@keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+.block_assessments table.assessments td.title2 {
+    width: 49%;
 }

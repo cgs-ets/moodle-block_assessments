@@ -55,7 +55,8 @@ class assessments_exporter extends exporter {
      */
     protected static function define_related() {
         return [
-            'timetabledata' => 'stdClass[]',
+            'scheduledata' => 'stdClass[]',
+            'classmapping' => 'stdClass[]',
         ];
     }
 
@@ -68,7 +69,7 @@ class assessments_exporter extends exporter {
      */
     protected static function define_other_properties() {
         return [
-            'assessments' => [
+            'schedule' => [
                 'type' => PARAM_RAW,
                 'multiple' => true,
             ],
@@ -82,123 +83,57 @@ class assessments_exporter extends exporter {
      * @return array Keys are the property names, values are their values.
      */
     protected function get_other_values(renderer_base $output) {
-        global $USER;
+        global $DB, $USER;
 
-        $chronsort = array();
+        $schedule = array();
 
         // Build a useful and clean array of periods.
-        foreach ($this->related['timetabledata'] as $ix => $assessment) {
-            $chronsort[] = array(
+        foreach ($this->related['scheduledata'] as $ix => $assessment) {
+            // Build the array by term.
+            if (!isset($schedule[$assessment->term])) {
+                $schedule[$assessment->term] = array(
+                    'term' => $assessment->term,
+                    'assessments' => array(),
+                );
+            }
+            // Check for mapped course. 
+            $url = '';
+            $altdescription = '';
+            $classmapping = array_filter($this->related['classmapping'], function($map) use ($assessment) {
+                if (strpos($map->syncode, $assessment->classcode) !== false && $map->syncode != $assessment->classcode) {
+                    return true;
+                }
+                return false;
+            });
+            foreach ($classmapping as $classmap) {
+                if ($classmap->moodlecode) {
+                    $course = $DB->get_record('course', array('idnumber' => $classmap->moodlecode));
+                    if ($course) {
+                        // Use alt description for the course instead of the Synergetic timetable desc.
+                        $altdescription = $course->fullname;
+                        $url = new \moodle_url('/course/view.php', array('id' => $course->id));
+                        $url = $url->out(false);
+                        break;
+                    }
+                }
+            }
+            $schedule[$assessment->term]['assessments'][] = array(
                 'term' => $assessment->term,
                 'week' => $assessment->weeknumber,
                 'classcode' => $assessment->classcode,
                 'date' => date("d/m/Y", strtotime($assessment->testdate)),
                 'title1' => $assessment->hdgabbrev1,
-                'title2' => $assessment->heading
+                'title2' => $assessment->heading,
+                'eventorder' => $assessment->eventorder,
+                'url' => $url,
+                'altdescription' => $altdescription,
             );
         }
 
-        array_multisort(
-            array_column($chronsort, 'term'),  SORT_ASC,
-            array_column($chronsort, 'week'), SORT_ASC,
-            array_column($chronsort, 'classcode'), SORT_ASC,
-            $chronsort);
-
-
-echo "<pre>"; var_export($chronsort); exit;
-
-         
-
-
-        $test1 = (object) [
-            'instanceid' => 123,
-        ];
-        $test2 = (object) [
-            'dsffds' => 4243,
-            'ghfhghg' => 64565,
-        ];
-
         return [
-            'assessments' => array($test1, $test2)
+            'schedule' => array_values($schedule),
         ];
 
-
-
-
-
-
-
-
-
-
-
-
-        $config = get_config('block_assessments');
-        $title = $config->title;
-
-        $periods = [];
-        $numbreaks = 0;
-
-        // Build a useful and clean array of periods.
-        foreach ($this->related['timetabledata'] as $ix => $class) {
-
-            if($class->classdescription == null && $this->data->role == 'student'){
-                continue;
-            }
-            // Only include Periods, Sessions & Pastoral for now.
-            $validperiodnames = array_map('trim', explode(',', $this->related['validperiodnames']));
-            if (preg_match("/" . implode($validperiodnames, '|') . "/i", $class->perioddescription)) {
-                $relateds = [
-                    'timetablecolours' => $this->related['timetablecolours'],
-                    'validbreaknames' => $this->related['validbreaknames'],
-                    'classmapping' => $this->related['classmapping'],
-                ];
-
-                // if there is a previous period, check for duplicates
-                if ( count($periods) ) {
-                    $previousix = count($periods) - 1;
-                    // Sometimes staff can teach 2 classes at the same time.
-                    // Check if this period is the same as the last period
-                    if ( $class->perioddescription == $periods[$previousix]->perioddescription ) {
-                        // Attempt to incorporate the meaningful defference between the two classes into the previous period, and skip over this one.
-                        $differences = array_diff(explode(' ', $class->classdescription), explode(' ', $periods[$previousix]->classdescription));
-                        if ($differences) {
-                            $periods[$previousix]->classdescription .= ', ' . implode(' ', $differences);
-                        }
-                        continue;
-                    }
-                }
-
-                //Synergetic timetable data is not consistent for staff. Sometimes it includes breaks, sometimes has empty periods for staff. For students, these are free periods, for staff just exlude these things.
-                if ( $this->data->role == 'staff' ) {
-                    if ( strpos($class->perioddescription, 'Period') !== false && empty($class->classcode) ) {
-                        continue;
-                    }
-                }
-
-                // Export the period
-                $periodexporter = new period_exporter($class, $relateds);
-                $period = $periodexporter->export($output);
-
-                // Check if this period is a break
-                if ($period->isbreak) {
-                    $numbreaks++;
-                }
-
-                // Add the exported period to the list
-                $periods[] = $period;
-
-            }
-        }
-
-        return [
-            'periods' => $periods,
-            'title' => $title,
-            'numperiods' => count($periods),
-            'numbreaks' => $numbreaks,
-            'isstaff' => ($this->data->role == 'staff'),
-            'isstudent' => ($this->data->role == 'student'),
-        ];
     }
 
 

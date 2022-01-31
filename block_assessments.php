@@ -115,33 +115,16 @@ class block_assessments extends block_base {
             return $OUTPUT->render($notification);
         }
 
-        //try {
+        try {
             $data = utils::get_block_data($this->instance->id);
             if ($data) {
                 $this->content->text = $OUTPUT->render_from_template('block_assessments/content', $data);
             }
-        //} catch (Exception $e) {
-         //   $this->content->text = '<h5>' . get_string('assessmentsunavailable', 'block_assessments') . '</h5>';
-        //}
+        } catch (Exception $e) {
+            $this->content->text = '<h5>' . get_string('assessmentsunavailable', 'block_assessments') . '</h5>';
+        }
 
         return $this->content;
-    }
-
-
-    /**
-     * Gets Javascript required for the widget functionality.
-     */
-    public function get_required_javascript() {
-        global $USER;
-        $config = get_config('block_assessments');
-        parent::get_required_javascript();
-        $this->page->requires->js_call_amd('block_assessments/control', 'init', [
-            'instanceid' => $this->instance->id,
-            'date' => date('Y-m-d', time()),
-            'preference' => get_user_preferences('block_assessments_collapsed'),
-            'userid' => $USER->id,
-            'title' => $config->title,
-        ]);
     }
 
 
