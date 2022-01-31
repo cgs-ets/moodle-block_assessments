@@ -26,22 +26,28 @@
 
 <div class="schedule" data-region="block_assessments-instance-{{instanceid}}">
     {{#schedule}}
-        <h5>Term {{term}}</h5>
-        <table class="assessments">
-            {{#assessments}}
-                <tr class="assessment" data-eventorder="{{eventorder}}">
-                    <td class="classcode">
-                        {{#url}}<a class="classinfo" href="{{url}}">{{/url}}
-                            <span class="classdesc" {{#altdescription}}title="{{altdescription}}"{{/altdescription}}>
-                                {{#altdescription}}{{altdescription}}{{/altdescription}}{{^altdescription}}{{classcode}}{{/altdescription}}
-                            </span>
-                        {{#url}}</a>{{/url}}
-                    </td>
-                    <td class="date">{{date}} (W{{week}})</td>
-                    <!--<td class="title1">{{title1}}</td>-->
-                    <td class="title2">{{title2}}</td>
-                </tr>
-            {{/assessments}}
-        </table>
+        {{#semesters}}
+            <div class="semester">
+            {{#terms}}
+                <h5>Term {{term}}</h5>
+                <table class="assessments">
+                    {{#assessments}}
+                        <tr class="assessment" data-eventorder="{{eventorder}}">
+                            <td class="classcode">
+                                {{#url}}<a class="classinfo" href="{{url}}">{{/url}}
+                                    <span class="classdesc" {{#altdescription}}title="{{altdescription}}"{{/altdescription}}>
+                                        {{#altdescription}}{{altdescription}}{{/altdescription}}{{^altdescription}}{{classcode}}{{/altdescription}}
+                                    </span>
+                                {{#url}}</a>{{/url}}
+                            </td>
+                            <td class="date">{{date}} (W{{week}})</td>
+                            <!--<td class="title1">{{title1}}</td>-->
+                            <td class="title2">{{title2}}</td>
+                        </tr>
+                    {{/assessments}}
+                </table>
+            {{/terms}}
+            </div>
+        {{/semesters}}
     {{/schedule}}    
 </div>

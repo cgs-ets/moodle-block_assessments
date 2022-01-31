@@ -85,17 +85,47 @@ class assessments_exporter extends exporter {
     protected function get_other_values(renderer_base $output) {
         global $DB, $USER;
 
-        $schedule = array();
+        // The data structure.
+        $schedule = array(
+            'semesters' => array(
+                array(
+                    'semester' => 1,
+                    'terms' => array(
+                        1 => array(
+                            'term' => 1,
+                            'assessments' => array()
+                        ),
+                        2 => array(
+                            'term' => 2,
+                            'assessments' => array()
+                        )
+                    )
+                ),
+                array(
+                    'semester' => 2,
+                    'terms' => array(
+                        3 => array(
+                            'term' => 3,
+                            'assessments' => array()
+                        ),
+                        4 => array(
+                            'term' => 4,
+                            'assessments' => array()
+                        ),
+                    )
+                ),
+            )
+        );
 
         // Build a useful and clean array of periods.
         foreach ($this->related['scheduledata'] as $ix => $assessment) {
             // Build the array by term.
-            if (!isset($schedule[$assessment->term])) {
-                $schedule[$assessment->term] = array(
-                    'term' => $assessment->term,
-                    'assessments' => array(),
-                );
-            }
+            //if (!isset($schedule[$assessment->term])) {
+            //    $schedule[$assessment->term] = array(
+            //        'term' => $assessment->term,
+            //        'assessments' => array(),
+            //    );
+            //}
             // Check for mapped course. 
             $url = '';
             $altdescription = '';
@@ -117,7 +147,11 @@ class assessments_exporter extends exporter {
                     }
                 }
             }
-            $schedule[$assessment->term]['assessments'][] = array(
+            $semester = 0;
+            if ($assessment->term > 2) {
+                $semester = 1;
+            }
+            $schedule['semesters'][$semester]['terms'][$assessment->term]['assessments'][] = array(
                 'term' => $assessment->term,
                 'week' => $assessment->weeknumber,
                 'classcode' => $assessment->classcode,
@@ -130,8 +164,12 @@ class assessments_exporter extends exporter {
             );
         }
 
+        $schedule['semesters'][0]['terms'] = array_values($schedule['semesters'][0]['terms']);
+        $schedule['semesters'][1]['terms'] = array_values($schedule['semesters'][1]['terms']);
+        //echo "<pre>"; var_export($schedule);exit;
+
         return [
-            'schedule' => array_values($schedule),
+            'schedule' => $schedule,
         ];
 
     }

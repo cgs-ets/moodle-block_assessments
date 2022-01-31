@@ -21,6 +21,13 @@
 .block_assessments h5 {
     margin-bottom: 0;
 }
+.block_assessments .schedule {
+    display: flex;
+}
+.block_assessments .semester {
+    width: 48%;
+    margin-right: 2%;
+}
 .block_assessments table.assessments {
     width: 100%;
     margin-bottom: 15px;
@@ -36,6 +43,7 @@
     display: inline-block;
     overflow: hidden;
     border-bottom: 1px solid #eee;
+    line-height: 20px;
 }
 .block_assessments table.assessments td.date {
     width: 26%;
