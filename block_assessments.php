@@ -118,10 +118,13 @@ class block_assessments extends block_base {
         try {
             $data = utils::get_block_data($this->instance->id);
             if ($data) {
-                $this->content->text = $OUTPUT->render_from_template('block_assessments/content', $data);
+              $this->content->text = $OUTPUT->render_from_template('block_assessments/content', $data);
+            } else {
+              $this->title = null;
+              $this->content = null;
             }
         } catch (Exception $e) {
-            $this->content->text = '<h5>' . get_string('assessmentsunavailable', 'block_assessments') . '</h5>';
+            //$this->content->text = '<h5>' . get_string('assessmentsunavailable', 'block_assessments') . '</h5>';
         }
 
         return $this->content;
