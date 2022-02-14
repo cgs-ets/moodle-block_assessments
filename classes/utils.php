@@ -105,7 +105,6 @@ class utils {
             // Connect to external DB
             $externalDB->connect($config->dbhost, $config->dbuser, $config->dbpass, $config->dbname, '');
 
-            $username = 16481;
             $scheduledata = $externalDB->get_records_sql($config->dbassessmentproc, array($username));
 
         } catch (Exception $ex) {
