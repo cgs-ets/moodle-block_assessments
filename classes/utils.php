@@ -92,7 +92,7 @@ class utils {
         } else {
             // Get the timetable user.
             if ( !$role = static::get_user_type($userroles, $studentroles, $staffroles) ) {
-                //return null;
+                return null;
             }
         }
 
