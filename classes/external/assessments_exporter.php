@@ -164,6 +164,15 @@ class assessments_exporter extends exporter {
             );
         }
 
+        // Unset terms with no assessments.
+        for( $s = 0; $s <= 1; $s++ ) {
+          foreach ($schedule['semesters'][$s]['terms'] as $i => $term) {
+            if (empty($term['assessments'])) {
+              unset($schedule['semesters'][$s]['terms'][$i]);
+            }
+          }
+        }
+
         $schedule['semesters'][0]['terms'] = array_values($schedule['semesters'][0]['terms']);
         $schedule['semesters'][1]['terms'] = array_values($schedule['semesters'][1]['terms']);
         //echo "<pre>"; var_export($schedule);exit;
