@@ -60,6 +60,8 @@ $string['mappingtableid'] = 'Sequence number';
 $string['mappingtableid_desc'] = 'Name of the column containing the sequence number in the mapping table.';
 $string['mappingtableextcode'] = 'External code';
 $string['mappingtableextcode_desc'] = 'Name of the column containing the external course code in the mapping table.';
+$string['mappingtableassesscode'] = 'Assessment code';
+$string['mappingtableassesscode_desc'] = 'Name of the column containing the external assessment code in the mapping table.';
 $string['mappingtablemoocode'] = 'Moodle idnumber';
 $string['mappingtablemoocode_desc'] = 'Name of the column containing the corresponding Moodle course idnumber.';
 

@@ -65,9 +65,10 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('block_assessments/title', get_string('title', 'block_assessments'), '', ''));
 
     // Mapping timetable class codes to Moodle courses.
-    $settings->add(new admin_setting_configtext('block_assessments/mappingtable', get_string('mappingtable', 'block_my_day_timetable'), get_string('mappingtable_desc', 'block_my_day_timetable'), ''));
-    $settings->add(new admin_setting_configtext('block_assessments/mappingtableid', get_string('mappingtableid', 'block_my_day_timetable'), get_string('mappingtableid_desc', 'block_my_day_timetable'), ''));
-    $settings->add(new admin_setting_configtext('block_assessments/mappingtableextcode', get_string('mappingtableextcode', 'block_my_day_timetable'), get_string('mappingtableextcode_desc', 'block_my_day_timetable'), ''));
-    $settings->add(new admin_setting_configtext('block_assessments/mappingtablemoocode', get_string('mappingtablemoocode', 'block_my_day_timetable'), get_string('mappingtablemoocode_desc', 'block_my_day_timetable'), ''));
+    $settings->add(new admin_setting_configtext('block_assessments/mappingtable', get_string('mappingtable', 'block_assessments'), get_string('mappingtable_desc', 'block_assessments'), ''));
+    $settings->add(new admin_setting_configtext('block_assessments/mappingtableid', get_string('mappingtableid', 'block_assessments'), get_string('mappingtableid_desc', 'block_assessments'), ''));
+    $settings->add(new admin_setting_configtext('block_assessments/mappingtableextcode', get_string('mappingtableextcode', 'block_assessments'), get_string('mappingtableextcode_desc', 'block_assessments'), ''));
+    $settings->add(new admin_setting_configtext('block_assessments/mappingtableassesscode', get_string('mappingtableassesscode', 'block_assessments'), get_string('mappingtableassesscode_desc', 'block_assessments'), ''));
+    $settings->add(new admin_setting_configtext('block_assessments/mappingtablemoocode', get_string('mappingtablemoocode', 'block_assessments'), get_string('mappingtablemoocode_desc', 'block_assessments'), ''));
 
 }
