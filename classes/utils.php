@@ -129,7 +129,7 @@ class utils {
                           FROM  $config->mappingtable
                          WHERE  0 = 1";
                 foreach ($classcodes as $code) {
-                    $sql .= " OR SynCode LIKE '$code%'";
+                    $sql .= " OR {$config->mappingtableextcode} LIKE '$code%'";
                 }
                 $classmapping = $externalDB->get_records_sql($sql);
 
