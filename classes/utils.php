@@ -118,18 +118,16 @@ class utils {
         // Get Moodle class mappings
         $classmapping = array();
         if (!empty($config->mappingtable)) {
-            $classcodes = array_filter(array_column($scheduledata, 'classcode'));
-            if ($classcodes) {
-                //$classcodes = array_map(function($code) {
-                //    return $code . #;
-                //}, $classcodes);
+            $assessmentcodes = array_filter(array_column($scheduledata, 'assessmentcode'));
+            if ($assessmentcodes) {
                 $sql = "SELECT  $config->mappingtableid,
                                 $config->mappingtableextcode,
+                                $config->mappingtableassesscode,
                                 $config->mappingtablemoocode
                           FROM  $config->mappingtable
                          WHERE  0 = 1";
-                foreach ($classcodes as $code) {
-                    $sql .= " OR {$config->mappingtableassesscode} LIKE '$code%'";
+                foreach ($assessmentcodes as $code) {
+                  $sql .= " OR {$config->mappingtableassesscode} = '{$code}'";
                 }
                 $classmapping = $externalDB->get_records_sql($sql);
 

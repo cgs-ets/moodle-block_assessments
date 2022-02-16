@@ -130,10 +130,10 @@ class assessments_exporter extends exporter {
             $url = '';
             $altdescription = '';
             $classmapping = array_filter($this->related['classmapping'], function($map) use ($assessment) {
-                if (strpos($map->syncode, $assessment->classcode) !== false && $map->syncode != $assessment->classcode) {
-                    return true;
-                }
-                return false;
+              if (strpos($map->syncode, $assessment->classcode) !== false || $map->assessmentcode == $assessment->assessmentcode) {
+                  return true;
+              }
+              return false;
             });
             foreach ($classmapping as $classmap) {
                 if ($classmap->moodlecode) {
