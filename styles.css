@@ -45,13 +45,16 @@
     border-bottom: 1px solid #eee;
     line-height: 20px;
 }
+.block_assessments table.assessments td.classcode {
+  width: 32%;
+}
 .block_assessments table.assessments td.date {
-    width: 26%;
+    width: 17%;
     font-size: 11px;
 }
 .block_assessments table.assessments td.title1 {
     width: 10%;
 }
 .block_assessments table.assessments td.title2 {
-    width: 49%;
+    width: 51%;
 }
