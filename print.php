@@ -28,8 +28,7 @@ use block_assessments\utils;
 
 $instanceid = required_param('instanceid', PARAM_INT);
 $courseid   = required_param('courseid', PARAM_INT);
-$username   = required_param('username', PARAM_INT);
-
+$username   = required_param('username', PARAM_RAW);
 
 // Determine course and context.
 $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
@@ -55,6 +54,7 @@ $PAGE->navbar->add($title);
 
 // Check user is logged in and capable of viewing.
 require_login($course, false);
+
 $data = utils::get_block_data($instanceid);
 if (empty($data)) {
   exit;
