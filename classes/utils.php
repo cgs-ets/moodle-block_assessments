@@ -75,7 +75,7 @@ class utils {
     
         // Determine if user is viewing this block on a profile page.
         if ( $PAGE->url->get_path() == '/user/profile.php' ||
-             $PAGE->url->get_path() == '/block/assessments/print.php'
+             $PAGE->url->get_path() == '/blocks/assessments/print.php'
            ) {
             
             // Get the profile user.
