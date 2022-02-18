@@ -154,7 +154,7 @@ class utils {
         $relateds = [
             'scheduledata' => $scheduledata,
             'classmapping' => $classmapping,
-            'user' => $username,
+            'username' => $username,
         ];
         $schedule = new \block_assessments\external\assessments_exporter($props, $relateds);
         $data = $schedule->export($OUTPUT);
