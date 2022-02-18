@@ -60,7 +60,7 @@ class assessments_exporter extends exporter {
         return [
             'scheduledata' => 'stdClass[]',
             'classmapping' => 'stdClass[]',
-            'username' => 'string',
+            'username' => 'string?',
         ];
     }
 

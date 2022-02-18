@@ -24,6 +24,8 @@
  */
 // Include required files and classes.
 require_once('../../config.php');
+use block_assessments\utils;
+
 $instanceid = required_param('instanceid', PARAM_INT);
 $courseid   = required_param('courseid', PARAM_INT);
 $username   = required_param('username', PARAM_INT);

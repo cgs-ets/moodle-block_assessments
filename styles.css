@@ -58,3 +58,8 @@
 .block_assessments table.assessments td.title2 {
     width: 49%;
 }
+.block_assessments a.btn-print {
+  position: absolute;
+  right: 0;
+  font-size: 20px;
+}
