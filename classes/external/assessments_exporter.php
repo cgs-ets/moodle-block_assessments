@@ -40,9 +40,12 @@ class assessments_exporter extends exporter {
      */
     protected static function define_properties() {
         return [
-            'instanceid' => [
-                'type' => PARAM_INT,
-            ],
+          'instanceid' => [
+              'type' => PARAM_INT,
+          ],
+          'courseid' => [
+              'type' => PARAM_INT,
+          ],
         ];
     }
 
@@ -57,6 +60,7 @@ class assessments_exporter extends exporter {
         return [
             'scheduledata' => 'stdClass[]',
             'classmapping' => 'stdClass[]',
+            'username' => 'string',
         ];
     }
 
@@ -69,10 +73,10 @@ class assessments_exporter extends exporter {
      */
     protected static function define_other_properties() {
         return [
-            'schedule' => [
-                'type' => PARAM_RAW,
-                'multiple' => true,
-            ],
+          'schedule' => [
+              'type' => PARAM_RAW,
+              'multiple' => true,
+          ],
         ];
     }
 
@@ -176,6 +180,15 @@ class assessments_exporter extends exporter {
         $schedule['semesters'][0]['terms'] = array_values($schedule['semesters'][0]['terms']);
         $schedule['semesters'][1]['terms'] = array_values($schedule['semesters'][1]['terms']);
         //echo "<pre>"; var_export($schedule);exit;
+
+
+        // Get the print preview url.
+        $printurl = new \moodle_url('/blocks/assessments/print.php', array(
+          'instanceid' => $this->data->instanceid,
+          'courseid' => $this->data->courseid,
+          'username' => $this->related['username'],
+        ));
+        $schedule['printurl'] = $printurl->out(false);
 
         return [
             'schedule' => $schedule,

@@ -74,9 +74,18 @@ class utils {
         $staffroles = array_map('trim', explode(',', $config->staffroles));
     
         // Determine if user is viewing this block on a profile page.
-        if ( $PAGE->url->get_path() == '/user/profile.php' ) {
+        if ( $PAGE->url->get_path() == '/user/profile.php' ||
+             $PAGE->url->get_path() == '/block/assessments/print.php'
+           ) {
+            
             // Get the profile user.
-            $profileuser = $DB->get_record('user', ['id' => $PAGE->url->get_param('id')]);
+            $profileuser = null;
+            if ($PAGE->url->get_path() == '/user/profile.php') {
+              $profileuser = $DB->get_record('user', ['id' => $PAGE->url->get_param('id')]);
+            } else {
+              $profileuser = $DB->get_record('user', ['username' => $PAGE->url->get_param('username')]);
+            }
+
             $username = $profileuser->username;
             // Load the user's custom profile fields.
             profile_load_custom_fields($profileuser);
@@ -139,11 +148,13 @@ class utils {
         }
 
         $props = (object) [
-            'instanceid' => $instanceid,
+          'instanceid' => $instanceid,
+          'courseid' => $COURSE->id,
         ];
         $relateds = [
             'scheduledata' => $scheduledata,
             'classmapping' => $classmapping,
+            'user' => $username,
         ];
         $schedule = new \block_assessments\external\assessments_exporter($props, $relateds);
         $data = $schedule->export($OUTPUT);

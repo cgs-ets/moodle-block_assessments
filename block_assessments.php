@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This block generates a daily timetable based on external user class data.
+ * This block displays a list of assessments pulled from Synergetic.
  *
  * @package   block_assessments
  * @copyright 2022 Michael Vangelovski
