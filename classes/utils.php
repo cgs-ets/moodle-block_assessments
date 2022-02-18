@@ -55,7 +55,7 @@ class utils {
         return false;
     }
 
-    public static function get_block_data($instanceid) {
+    public static function get_block_data($instanceid, $viewusername = null) {
         global $COURSE, $DB, $USER, $PAGE, $OUTPUT;
     
         $data = null;
@@ -83,7 +83,7 @@ class utils {
             if ($PAGE->url->get_path() == '/user/profile.php') {
               $profileuser = $DB->get_record('user', ['id' => $PAGE->url->get_param('id')]);
             } else {
-              $profileuser = $DB->get_record('user', ['username' => $PAGE->url->get_param('username')]);
+              $profileuser = $DB->get_record('user', ['username' => $viewusername]);
             }
 
             $username = $profileuser->username;
@@ -157,9 +157,10 @@ class utils {
             'username' => $username,
         ];
         $schedule = new \block_assessments\external\assessments_exporter($props, $relateds);
-        $data = $schedule->export($OUTPUT);
+        $renderer = $PAGE->get_renderer('core');
+        $data = $schedule->export($renderer);
         //echo "<pre>"; var_export($data); exit;
-    
+
         return $data;
     }
     

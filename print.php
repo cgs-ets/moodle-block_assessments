@@ -55,7 +55,7 @@ $PAGE->navbar->add($title);
 // Check user is logged in and capable of viewing.
 require_login($course, false);
 
-$data = utils::get_block_data($instanceid);
+$data = utils::get_block_data($instanceid, $username);
 if (empty($data)) {
   exit;
 }
