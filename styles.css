@@ -63,23 +63,3 @@
   right: 0;
   font-size: 20px;
 }
-
-.block_assessments .print {visibility:hidden;}
-@media screen {
-  .block_assessments .screenonly {
-    visibility:visible;
-  }
-  .block_assessments .print {
-    visibility: visible;
-    padding: 14px 20px;
-    overflow: hidden;
-    background-color: #005b94;
-    color: #fff;
-    margin: 10px 0;
-    font-size: 15px;
-    text-decoration: none;
-    font-weight: 600;
-    font-family: sans-serif;
-    float: left;
-  }
-}

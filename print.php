@@ -64,7 +64,33 @@ if (empty($data)) {
 // Add styles.
 echo '<link rel="stylesheet" type="text/css" href="' . new moodle_url($CFG->wwwroot . '/block/assessments/styles.css', array('nocache' => rand())) . '">';
 // Some reset css.
-echo '<style>body{margin:25px;padding:0;font-family:sans-serif;} table,th,td{border: 1px solid black;border-collapse:collapse;padding: 9px 13px;}</style>';
+echo "<style>
+body{
+  margin:25px;padding:0;font-family:sans-serif;
+} 
+table,th,td{
+  border: 1px solid black;border-collapse:collapse;padding: 9px 13px;
+}
+.print{visibility:hidden;}
+@media screen {
+  .block_assessments .screenonly {
+    visibility:visible;
+  }
+  .block_assessments .print {
+    visibility: visible;
+    padding: 14px 20px;
+    overflow: hidden;
+    background-color: #005b94;
+    color: #fff;
+    margin: 10px 0;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: sans-serif;
+    float: left;
+  }
+}
+</style>";
 // Display asssessment schedule.
 echo $OUTPUT->render_from_template('block_assessments/print', $data);
 exit;
