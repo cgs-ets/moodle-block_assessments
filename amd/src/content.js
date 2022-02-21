@@ -24,6 +24,8 @@ define(['jquery', 'core/log', 'core/ajax'], function($, Log, Ajax) {
 
     return {
         init: function(userid) {
+            Log.debug('block_assessments: initializing');
+
             if (!userid) {
                 Log.error('block_assessments: userid not provided!');
                 return;
