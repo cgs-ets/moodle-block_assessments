@@ -73,10 +73,10 @@ table,th,td{
 }
 .print{visibility:hidden;}
 @media screen {
-  .block_assessments .screenonly {
+  .screenonly {
     visibility:visible;
   }
-  .block_assessments .print {
+  .print {
     visibility: visible;
     padding: 14px 20px;
     overflow: hidden;
