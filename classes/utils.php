@@ -87,7 +87,7 @@ class utils {
             }
             // Do not show staff schedule on staff profile.
             if ($role != 'student') {
-                return null;
+            //    return null;
             }
             // Check whether the current user can view the profile timetable.
             if ( !static::can_view_on_profile($profileuser, $userroles, $staffroles) ) {

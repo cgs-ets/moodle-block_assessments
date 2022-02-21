@@ -6,10 +6,10 @@
     padding-top: 4px;
 }
 .block_assessments .card-title {
-    display: none;
-}
-.block_assessments.block_with_controls .card-title {
-    display: block;
+  margin: 0!important;
+  background: #f2f4f6;
+  padding: 3px 10px;
+  margin-bottom: 9px !important;
 }
 .block_assessments .card-body {
     padding: 0 !important;
@@ -28,9 +28,6 @@
 .block_assessments table.assessments {
     width: 100%;
     margin-bottom: 15px;
-}
-.block_assessments table.assessments tr.assessment[data-eventorder="Past"] {
-    
 }
 .block_assessments table.assessments td {
     font-size: 13px;
@@ -57,10 +54,16 @@
 }
 .block_assessments a.btn-print {
   position: absolute;
-  right: 0;
+  right: 42px;
   font-size: 20px;
+  top: 2px;
 }
-
+.block_assessments .block_assessments_toggle {
+  position: absolute;
+  right: 10px;
+  font-size: 20px;
+  top: 6px;
+}
 .block_assessments .root .schedule {
   display: none;
 }
