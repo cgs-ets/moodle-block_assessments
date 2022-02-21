@@ -24,10 +24,11 @@
     My Day (Timetable) block content template.
 }}
 
-<div class="schedule" data-region="block_assessments-instance-{{instanceid}}">
+<div class="schedule" data-region="block_assessments-instance-{{instanceid}}" data-blocktoggle="{{blocktoggle}}">
     {{#schedule}}
         <a href="#" class="blocktoggle"><i class="fa fa-eye" aria-hidden="true"></i></a>
         <a href="#" class="blocktoggle"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+        <div class="blocktoggle">{{#blocktoggle}} &#xf06e; {{/blocktoggle}}{{^blocktoggle}} &#xf070; {{/blocktoggle}}</div>
         <a target="_blank" class="btn-print" data-toggle="tooltip" data-placement="right" title="" href="{{printurl}}" data-original-title="Print preview"><i class="fa fa-print" aria-hidden="true"></i></a>
         {{#semesters}}
             <div class="semester">

@@ -1,8 +1,19 @@
 {
-       "name": "moodle-block_assessments",
-       "devDependencies": {
-              "grunt": "^1.0.4",
-              "grunt-stylelint": "^0.11.1",
-              "stylelint": "^10.1.0"
-       }
+  "name": "block_assessments",
+  "private": true,
+  "description": "Assessment Schedule Block",
+  "devDependencies": {
+    "grunt": "^1.1.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0"
+  },
+  "version": "1.0.0",
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://cgs-ets@bitbucket.org/cgs-ets/moodle-block_assessments.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/cgs-ets/moodle-block_assessments#readme"
 }

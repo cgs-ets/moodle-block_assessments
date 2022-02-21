@@ -123,6 +123,9 @@ class block_assessments extends block_base {
               $this->title = null;
               $this->content = null;
             }
+
+            $this->page->requires->js_call_amd('block_assessments/content', 'init', array($USER->id));
+
         } catch (Exception $e) {
             //$this->content->text = '<h5>' . get_string('assessmentsunavailable', 'block_assessments') . '</h5>';
         }
