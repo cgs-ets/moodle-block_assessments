@@ -74,18 +74,9 @@ class utils {
         $staffroles = array_map('trim', explode(',', $config->staffroles));
     
         // Determine if user is viewing this block on a profile page.
-        if ( $PAGE->url->get_path() == '/user/profile.php' ||
-             $PAGE->url->get_path() == '/blocks/assessments/print.php'
-           ) {
-            
+        if ( $PAGE->url->get_path() == '/user/profile.php' ) {
             // Get the profile user.
-            $profileuser = null;
-            if ($PAGE->url->get_path() == '/user/profile.php') {
-              $profileuser = $DB->get_record('user', ['id' => $PAGE->url->get_param('id')]);
-            } else {
-              $profileuser = $DB->get_record('user', ['username' => $viewusername]);
-            }
-
+            $profileuser = $DB->get_record('user', ['id' => $PAGE->url->get_param('id')]);
             $username = $profileuser->username;
             // Load the user's custom profile fields.
             profile_load_custom_fields($profileuser);
@@ -99,6 +90,14 @@ class utils {
                 return null;
             }
             // Check whether the current user can view the profile timetable.
+            if ( !static::can_view_on_profile($profileuser, $userroles, $staffroles) ) {
+                return null;
+            }
+        } else if ($PAGE->url->get_path() == '/blocks/assessments/print.php') {
+            $profileuser = $DB->get_record('user', ['username' => $viewusername]);
+            $username = $profileuser->username;
+            profile_load_custom_fields($profileuser);
+            $profileroles = explode(',', $profileuser->profile['CampusRoles']);
             if ( !static::can_view_on_profile($profileuser, $userroles, $staffroles) ) {
                 return null;
             }

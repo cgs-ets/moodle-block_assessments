@@ -64,7 +64,7 @@ if (empty($data)) {
 // Add styles.
 echo '<link rel="stylesheet" type="text/css" href="' . new moodle_url($CFG->wwwroot . '/block/assessments/styles.css', array('nocache' => rand())) . '">';
 // Some reset css.
-echo '<style>body{margin:0;padding:0;}</style>';
+echo '<style>body{margin:0;padding:0;font-family:sans-serif;} table,th,td{border: 1px solid black;border-collapse:collapse;}</style>';
 // Display asssessment schedule.
-echo $OUTPUT->render_from_template('block_assessments/content', $data);
+echo $OUTPUT->render_from_template('block_assessments/print', $data);
 exit;
