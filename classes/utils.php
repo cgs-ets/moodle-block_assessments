@@ -166,10 +166,10 @@ class utils {
         $schedule = new \block_assessments\external\assessments_exporter($props, $relateds);
         $renderer = $PAGE->get_renderer('core');
         $data = $schedule->export($renderer);
-        //echo "<pre>"; var_export($data); exit;
 
         //Add toggle to data.
-        $data['toggle'] = (int) get_user_preferences('block_assessments_toggle', 1, $USER); 
+        $data->toggle = (int) get_user_preferences('block_assessments_toggle', 1, $USER); 
+        //echo "<pre>"; var_export($data); exit;
 
         return $data;
     }

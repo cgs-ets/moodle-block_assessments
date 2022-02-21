@@ -27,8 +27,8 @@
 <div class="schedule" data-region="block_assessments-instance-{{instanceid}}" data-toggle="{{toggle}}">
     {{#schedule}}
         <a href="#" class="block_assessments_toggle">
-          {{#toggle}}<i class="fa fa-eye" aria-hidden="true"></i>{{/toggle}}
-          {{^toggle}}<i class="fa fa-eye-slash" aria-hidden="true"></i>{{/toggle}}
+          <i class="toggle-show fa fa-eye" aria-hidden="true"></i>
+          <i class="toggle-hide fa fa-eye-slash" aria-hidden="true"></i>
         </a>
         <a target="_blank" class="btn-print" data-toggle="tooltip" data-placement="right" title="" href="{{printurl}}" data-original-title="Print preview"><i class="fa fa-print" aria-hidden="true"></i></a>
         {{#semesters}}
