@@ -57,6 +57,7 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('block_assessments/dbname', get_string('dbname', 'block_assessments'), '', ''));
 
     $settings->add(new admin_setting_configtext('block_assessments/dbassessmentproc', get_string('dbassessmentproc', 'block_assessments'), get_string('dbassessmentproc_desc', 'block_assessments'), ''));
+    $settings->add(new admin_setting_configtext('block_assessments/dbassessmentproc', get_string('dbassessmentprocstaff', 'block_assessments'), get_string('dbassessmentprocstaff_desc', 'block_assessments'), ''));
 
     // The user's constit codes are how this plugin determines which timetable to fetch (student vs staff).
     $settings->add(new admin_setting_configtext('block_assessments/studentroles', get_string('studentroles', 'block_assessments'), get_string('studentroles_desc', 'block_assessments'), ''));

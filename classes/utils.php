@@ -94,6 +94,10 @@ class utils {
             if ( !$role = static::get_user_type($profileroles, $studentroles, $staffroles) ) {
                 return null;
             }
+            // Do not show staff schedule on staff profile.
+            if ($role != 'student') {
+                return null;
+            }
             // Check whether the current user can view the profile timetable.
             if ( !static::can_view_on_profile($profileuser, $userroles, $staffroles) ) {
                 return null;
@@ -105,6 +109,7 @@ class utils {
             }
         }
 
+ 
         $scheduledata = null;
         $config = get_config('block_assessments');
         try {
@@ -114,8 +119,11 @@ class utils {
             // Connect to external DB
             $externalDB->connect($config->dbhost, $config->dbuser, $config->dbpass, $config->dbname, '');
 
-            $scheduledata = $externalDB->get_records_sql($config->dbassessmentproc, array($username));
-
+            if ($role == 'student') { 
+              $scheduledata = $externalDB->get_records_sql($config->dbassessmentproc, array($username));
+            } else {
+              $scheduledata = $externalDB->get_records_sql($config->dbassessmentprocstaff, array($username));
+            }
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }

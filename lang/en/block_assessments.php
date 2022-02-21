@@ -40,8 +40,10 @@ $string['dbhost_desc'] = 'Type database server IP address or host name. Use a sy
 $string['dbname'] = 'Database name';
 $string['dbuser'] = 'Database user';
 $string['dbpass'] = 'Database password';
-$string['dbassessmentproc'] = 'External assessments SQL';
+$string['dbassessmentproc'] = 'External assessments SQL for Students';
 $string['dbassessmentproc_desc'] = 'SQL to retrieve student assessments data.';
+$string['dbassessmentproc'] = 'External assessments SQL for Staff';
+$string['dbassessmentproc_desc'] = 'SQL to retrieve staff assessments data.';
 
 $string['timetablecolours'] = 'Timetable colours';
 $string['timetablecolours_desc'] = 'Configuration for period background colours. CSS Colors added in a JSON type format, e.g. <br>"math":"#547384",<br>"science":"#8A439C",<br>The colour is selected based on whether the key is found in the class description.';
