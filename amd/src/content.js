@@ -31,7 +31,7 @@ define(['jquery', 'core/log', 'core/ajax'], function($, Log, Ajax) {
                 return;
             }
 
-            var rootel = $('.block_assessments .schedule').first();
+            var rootel = $('.block_assessments .content').first();
             if (!rootel.length) {
                 Log.error('block_assessments: root element not found!');
                 return;

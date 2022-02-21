@@ -21,9 +21,6 @@
 .block_assessments h5 {
     margin-bottom: 0;
 }
-.block_assessments .schedule {
-    display: flex;
-}
 .block_assessments .semester {
     width: 48%;
     margin-right: 2%;
@@ -62,4 +59,20 @@
   position: absolute;
   right: 0;
   font-size: 20px;
+}
+
+.block_assessments .content .schedule {
+  display: none;
+}
+.block_assessments .content[data-toggle="1"] .schedule {
+  display: flex;
+}
+.block_assessments .content .toggle-hide {
+  display: none;
+}
+.block_assessments .content[data-toggle="1"] .toggle-hide {
+  display: block;
+}
+.block_assessments .content[data-toggle="1"] .toggle-show {
+  display: none;
 }
