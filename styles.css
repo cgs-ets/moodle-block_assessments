@@ -61,18 +61,18 @@
   font-size: 20px;
 }
 
-.block_assessments .content .schedule {
+.block_assessments .root .schedule {
   display: none;
 }
-.block_assessments .content[data-toggle="1"] .schedule {
+.block_assessments .root[data-toggle="1"] .schedule {
   display: flex;
 }
-.block_assessments .content .toggle-hide {
+.block_assessments .root .toggle-hide {
   display: none;
 }
-.block_assessments .content[data-toggle="1"] .toggle-hide {
+.block_assessments .root[data-toggle="1"] .toggle-hide {
   display: block;
 }
-.block_assessments .content[data-toggle="1"] .toggle-show {
+.block_assessments .root[data-toggle="1"] .toggle-show {
   display: none;
 }
