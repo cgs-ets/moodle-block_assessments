@@ -26,6 +26,8 @@
 
 <div class="schedule" data-region="block_assessments-instance-{{instanceid}}">
     {{#schedule}}
+        <a href="#" class="blocktoggle"><i class="fa fa-eye" aria-hidden="true"></i></a>
+        <a href="#" class="blocktoggle"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
         <a target="_blank" class="btn-print" data-toggle="tooltip" data-placement="right" title="" href="{{printurl}}" data-original-title="Print preview"><i class="fa fa-print" aria-hidden="true"></i></a>
         {{#semesters}}
             <div class="semester">
@@ -50,5 +52,6 @@
             {{/terms}}
             </div>
         {{/semesters}}
-    {{/schedule}}    
+    {{/schedule}}
+    <a href="#" class="print" onclick="window.print();return false;">Click here to print</a> 
 </div>
