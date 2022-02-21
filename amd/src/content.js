@@ -52,7 +52,7 @@ define(['jquery', 'core/log', 'core/ajax'], function($, Log, Ajax) {
      */
       function toggleBlock(open, userid) {
         // Save toggle state as a preference.
-        toggle = (open == '1') ? 0 : 1;
+        var toggle = (open == '1') ? 0 : 1;
         Log.debug('block_assessments: Setting toggle to ' + toggle);
         rootel.data('blocktoggle', toggle);
         var preferences = [{
