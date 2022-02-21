@@ -55,17 +55,18 @@
 .block_assessments a.btn-print {
   position: absolute;
   right: 42px;
-  font-size: 20px;
-  top: 2px;
+  font-size: 17px;
+  top: 6px;
 }
 .block_assessments .block_assessments_toggle {
   position: absolute;
   right: 10px;
-  font-size: 20px;
-  top: 6px;
+  font-size: 17px;
+  top: 10px;
 }
 .block_assessments .root .schedule {
   display: none;
+  padding: 0 10px;
 }
 .block_assessments .root[data-toggle="1"] .schedule {
   display: flex;
