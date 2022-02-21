@@ -57,7 +57,7 @@ define(['jquery', 'core/log', 'core/ajax'], function($, Log, Ajax) {
       function toggleBlock(toggle, userid, rootel) {
         // Save toggle state as a preference.
         Log.debug('block_assessments: Setting toggle to ' + toggle);
-        $(rootel).attr('data-toggle', toggle);
+        rootel.data('toggle', toggle+"");
         var preferences = [{
             'name': 'block_assessments_toggle',
             'value': toggle,
