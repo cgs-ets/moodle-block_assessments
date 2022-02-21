@@ -56,13 +56,19 @@
   position: absolute;
   right: 42px;
   font-size: 17px;
-  top: 6px;
+  top: -38px;
 }
 .block_assessments .block_assessments_toggle {
   position: absolute;
   right: 10px;
   font-size: 17px;
-  top: 10px;
+  top: -38px;
+}
+.block_assessments .root[data-toggle="1"] .block_assessments_toggle {
+  top: -35px;
+}
+.block_assessments .root {
+  position: relative;
 }
 .block_assessments .root .schedule {
   display: none;
