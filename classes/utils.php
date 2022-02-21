@@ -72,6 +72,9 @@ class utils {
         // Load in some config.
         $studentroles = array_map('trim', explode(',', $config->studentroles));
         $staffroles = array_map('trim', explode(',', $config->staffroles));
+
+        // Determine what kind of user this is.
+        $role = static::get_user_type($userroles, $studentroles, $staffroles);
     
         // Determine if user is viewing this block on a profile page.
         if ( $PAGE->url->get_path() == '/user/profile.php' ) {
@@ -81,7 +84,7 @@ class utils {
             // Load the user's custom profile fields.
             profile_load_custom_fields($profileuser);
             $profileroles = explode(',', $profileuser->profile['CampusRoles']);
-            // Get the user type.
+            // Determine what kind of user the profile is.
             if ( !$role = static::get_user_type($profileroles, $studentroles, $staffroles) ) {
                 return null;
             }
@@ -101,13 +104,7 @@ class utils {
             if ( !static::can_view_on_profile($profileuser, $userroles, $staffroles) ) {
                 return null;
             }
-        } else {
-            // Get the timetable user.
-            if ( !$role = static::get_user_type($userroles, $studentroles, $staffroles) ) {
-                return null;
-            }
         }
-
  
         $scheduledata = null;
         $config = get_config('block_assessments');
@@ -126,7 +123,7 @@ class utils {
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
-    
+
         if (empty($scheduledata)) {
             return;
         }
@@ -189,7 +186,7 @@ class utils {
 
     public static function can_view_on_profile($profileuser, $userroles, $staffroles) {
         global $DB, $USER;
-    
+
         // Staff are always allowed to view timetables in profiles.
         if (array_intersect($userroles, $staffroles)) {
             return true;
