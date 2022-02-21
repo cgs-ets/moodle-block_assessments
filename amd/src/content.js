@@ -36,9 +36,9 @@ define(['jquery', 'core/log', 'core/ajax'], function($, Log, Ajax) {
             }
 
             // Handle turn off audit mode button.
-            rootel.on('click', '.blocktoggle', function(e) {
+            rootel.on('click', '.block_assessments_toggle', function(e) {
                 e.preventDefault();
-                var open = rootel.data('blocktoggle');
+                var open = rootel.data('toggle');
                 toggleBlock(open, userid);
             });
         }
@@ -54,9 +54,9 @@ define(['jquery', 'core/log', 'core/ajax'], function($, Log, Ajax) {
         // Save toggle state as a preference.
         var toggle = (open == '1') ? 0 : 1;
         Log.debug('block_assessments: Setting toggle to ' + toggle);
-        rootel.data('blocktoggle', toggle);
+        rootel.data('toggle', toggle);
         var preferences = [{
-            'name': 'block_assessments_blocktoggle',
+            'name': 'block_assessments_toggle',
             'value': toggle,
             'userid': userid
         }];
