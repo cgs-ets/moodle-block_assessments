@@ -41,7 +41,8 @@ define(['jquery', 'core/log', 'core/ajax'], function($, Log, Ajax) {
             rootel.on('click', '.block_assessments_toggle', function(e) {
                 e.preventDefault();
                 var open = rootel.data('toggle');
-                toggleBlock(open, userid);
+                var toggle = (open == '1') ? 0 : 1;
+                toggleBlock(toggle, userid, rootel);
             });
         }
     };
@@ -49,12 +50,12 @@ define(['jquery', 'core/log', 'core/ajax'], function($, Log, Ajax) {
 
     /**
      * Click handler to toggle block.
-     * @param int open. Open or closed.
+     * @param int toggle. Open or closed.
      * @param int the user id.
+     * @param {jQuery} rootel.
      */
-      function toggleBlock(open, userid) {
+      function toggleBlock(toggle, userid, rootel) {
         // Save toggle state as a preference.
-        var toggle = (open == '1') ? 0 : 1;
         Log.debug('block_assessments: Setting toggle to ' + toggle);
         rootel.data('toggle', toggle);
         var preferences = [{
