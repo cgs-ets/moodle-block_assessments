@@ -58,8 +58,8 @@ class provider implements
      */
     public static function get_metadata(collection $collection) : collection {
 
-        $collection->add_user_preference('block_assessments_collapsed',
-                'privacy:metadata:preference:collapsed');
+        $collection->add_user_preference('block_assessments_toggle',
+                'privacy:metadata:preference:visible');
         
         return $collection;
     }
@@ -68,13 +68,11 @@ class provider implements
      *
      * @param int $userid ID of the user we are exporting data form.
      */
-    public static function export_user_preferences(int $userid) {
-
-       
-        $collapsed = get_user_preferences('block_assessments_collapsed', 1, $userid);
+    public static function export_user_preferences(int $userid) {       
+        $toggle = get_user_preferences('block_assessments_toggle', 1, $userid);
 
         writer::export_user_preference('block_assessments',
-                'block_assessments_collapsed', transform::yesno($collapsed),
+                'block_assessments_toggle', transform::yesno($toggle),
                 get_string('privacy:metadata', 'block_assessments'));
        
     }
