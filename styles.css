@@ -90,3 +90,8 @@
 .block_assessments table.assessments tr.assessment[data-eventorder="Past"] {
   display: none;
 }
+.block_assessments a.btn-showpast {
+  position: absolute;
+  right: 0;
+  font-size: 12px;
+}

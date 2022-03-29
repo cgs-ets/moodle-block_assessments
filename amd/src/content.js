@@ -45,6 +45,19 @@
               var toggle = (open == '1') ? 0 : 1;
               toggleBlock(toggle, userid, rootel);
           });
+
+          // Show past courses.
+          rootel.on('click', '.btn-showpast', function(e) {
+            e.preventDefault();
+            if (rootel.data('showingpast') == true) {
+              rootel.find('tr.assessment[data-eventorder="Past"]').hide();
+              rootel.data('showingpast', false);
+            } else {
+              rootel.find('tr.assessment[data-eventorder="Past"]').show();
+              rootel.data('showingpast', true);
+            }
+          });
+          
       }
   };
 
