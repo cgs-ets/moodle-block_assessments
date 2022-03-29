@@ -94,7 +94,8 @@
 .block_assessments table.assessments tr.assessment[data-eventorder="Past"]:hover {
   opacity: 1;
 }
-.block_assessments table.assessments tr.assessment[data-eventorder="This Week"] .date {
+.block_assessments table.assessments tr.assessment[data-eventorder="This Week"] .date,
+.block_assessments table.assessments tr.assessment[data-eventorder="Today"] .date {
     font-weight: 600;
     color: #B71C1C;
 }
