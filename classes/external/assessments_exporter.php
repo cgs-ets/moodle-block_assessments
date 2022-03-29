@@ -144,7 +144,7 @@ class assessments_exporter extends exporter {
                     $course = $DB->get_record('course', array('idnumber' => $classmap->moodlecode));
                     if ($course) {
                         // Use alt description for the course instead of the Synergetic timetable desc.
-                        $altdescription = $course->fullname;
+                        $altdescription = $course->shortname;
                         $url = new \moodle_url('/course/view.php', array('id' => $course->id));
                         $url = $url->out(false);
                         break;
