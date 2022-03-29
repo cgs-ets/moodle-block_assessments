@@ -40,7 +40,8 @@
     line-height: 20px;
 }
 .block_assessments table.assessments td.classcode {
-  width: 32%;
+  /*width: 32%;*/
+  width: 21%;
 }
 .block_assessments table.assessments td.date {
     width: 17%;

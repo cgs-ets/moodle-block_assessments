@@ -155,6 +155,19 @@ class assessments_exporter extends exporter {
             if ($assessment->term > 2) {
                 $semester = 1;
             }
+
+            // Due in / Days until.
+            $duein = '';
+            $difference = strtotime(date("Y-m-d", strtotime($assessment->testdate))) - strtotime(date("Y-m-d", time()));
+            if ($difference < 0) {
+                $duein = 'past';
+            } else if ($difference == 0) {
+                $duein = 'today';
+            } else {
+                $duein = floor($difference/60/60/24);
+                $duein = $duein . ' days';
+            }
+
             $schedule['semesters'][$semester]['terms'][$assessment->term]['assessments'][] = array(
                 'term' => $assessment->term,
                 'week' => $assessment->weeknumber,
@@ -165,6 +178,7 @@ class assessments_exporter extends exporter {
                 'eventorder' => $assessment->eventorder,
                 'url' => $url,
                 'altdescription' => $altdescription,
+                'duein' => $duein,
             );
         }
 
