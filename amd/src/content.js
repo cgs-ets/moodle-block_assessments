@@ -52,9 +52,11 @@
             if (rootel.data('showingpast') == true) {
               rootel.find('tr.assessment[data-eventorder="Past"]').hide();
               rootel.data('showingpast', false);
+              $(this).html("Show past assessments");
             } else {
               rootel.find('tr.assessment[data-eventorder="Past"]').show();
               rootel.data('showingpast', true);
+              $(this).html("Hide past assessments");
             }
           });
           

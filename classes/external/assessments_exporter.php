@@ -158,18 +158,16 @@ class assessments_exporter extends exporter {
             }
 
             // Due in / Days until.
-            $duein = '';
+            $duein = 'past';
             $difference = strtotime(date("Y-m-d", strtotime($assessment->testdate))) - strtotime(date("Y-m-d", time()));
-            if ($difference < 0) {
-                $duein = 'past';
-            } else if ($difference == 0) {
+            if ($difference == 0) {
                 $duein = 'today';
-            } else {
+            } else if ($difference > 0) {
                 $duein = floor($difference/60/60/24);
                 $duein = $duein . ' days';
             }
 
-            if ($duein = 'past') {
+            if ($duein == 'past') {
                 $schedule['haspastentries'] = true;
             }
 
