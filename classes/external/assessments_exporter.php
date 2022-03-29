@@ -91,6 +91,7 @@ class assessments_exporter extends exporter {
 
         // The data structure.
         $schedule = array(
+            'haspastentries' => false,
             'semesters' => array(
                 array(
                     'semester' => 1,
@@ -166,6 +167,10 @@ class assessments_exporter extends exporter {
             } else {
                 $duein = floor($difference/60/60/24);
                 $duein = $duein . ' days';
+            }
+
+            if ($duein = 'past') {
+                $schedule['haspastentries'] = true;
             }
 
             $schedule['semesters'][$semester]['terms'][$assessment->term]['assessments'][] = array(

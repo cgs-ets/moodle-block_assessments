@@ -44,7 +44,7 @@
   width: 21%;
 }
 .block_assessments table.assessments td.date {
-    width: 17%;
+    width: 22%;
     font-size: 11px;
 }
 .block_assessments table.assessments td.title1 {
@@ -85,5 +85,8 @@
   display: block;
 }
 .block_assessments .root[data-toggle="1"] .toggle-show {
+  display: none;
+}
+.block_assessments table.assessments tr.assessment[data-eventorder="Past"] {
   display: none;
 }

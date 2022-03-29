@@ -32,6 +32,11 @@
         </a>
         <div class="schedule">
           <a target="_blank" class="btn-print" title="" href="{{printurl}}" data-placement="right" data-toggle="tooltip" data-original-title="Print preview"><i class="fa fa-print" aria-hidden="true"></i></a>
+          
+          {{#haspastentries}}
+            <a class="btn-showpast" href="#">Show past assessments</a>
+          {{/haspastentries}}
+
           {{#semesters}}
               <div class="semester">
               {{#terms}}
