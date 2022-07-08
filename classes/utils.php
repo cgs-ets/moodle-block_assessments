@@ -79,7 +79,11 @@ class utils {
         // Determine if user is viewing this block on a profile page.
         if ( $PAGE->url->get_path() == '/user/profile.php' ) {
             // Get the profile user.
-            $profileuser = $DB->get_record('user', ['id' => $PAGE->url->get_param('id')]);
+            $uid = $PAGE->url->get_param('id');
+            if (empty($uid)) {
+                $uid = $USER->id;
+            }
+            $profileuser = $DB->get_record('user', ['id' => $uid]);
             $username = $profileuser->username;
             // Load the user's custom profile fields.
             profile_load_custom_fields($profileuser);
